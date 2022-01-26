@@ -1,4 +1,4 @@
-package sort
+package sorting
 
 import (
 	"math/rand"
@@ -10,7 +10,7 @@ func init() {
 	rand.Seed(time.Now().UnixNano())
 }
 
-func TestRadixSort(t *testing.T) {
+func TestQuickSort(t *testing.T) {
 	type args struct {
 		array []int
 	}
@@ -42,7 +42,7 @@ func TestRadixSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			RadixSort(tt.args.array)
+			QuickSort(tt.args.array)
 			confirmed := true
 			for i := 0; i < len(tt.args.array); i++ {
 				if tt.args.array[i] != tt.want[i] {
@@ -50,7 +50,7 @@ func TestRadixSort(t *testing.T) {
 				}
 			}
 			if !confirmed {
-				t.Errorf("RadixSort() = %+v,\n want %+v", tt.args.array, tt.want)
+				t.Errorf("QuickSort() = %+v,\n want %+v", tt.args.array, tt.want)
 			}
 		})
 	}

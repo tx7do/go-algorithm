@@ -1,8 +1,16 @@
-package sort
+package sorting
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+	"time"
+)
 
-func TestSelectionSort(t *testing.T) {
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+func TestRadixSort(t *testing.T) {
 	type args struct {
 		array []int
 	}
@@ -34,7 +42,7 @@ func TestSelectionSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			SelectionSort(tt.args.array)
+			RadixSort(tt.args.array)
 			confirmed := true
 			for i := 0; i < len(tt.args.array); i++ {
 				if tt.args.array[i] != tt.want[i] {
@@ -42,7 +50,7 @@ func TestSelectionSort(t *testing.T) {
 				}
 			}
 			if !confirmed {
-				t.Errorf("SelectionSort() = %+v,\n want %+v", tt.args.array, tt.want)
+				t.Errorf("RadixSort() = %+v,\n want %+v", tt.args.array, tt.want)
 			}
 		})
 	}

@@ -1,8 +1,8 @@
-package sort
+package sorting
 
 import "testing"
 
-func TestMergeSort(t *testing.T) {
+func TestSelectionSort(t *testing.T) {
 	type args struct {
 		array []int
 	}
@@ -34,7 +34,7 @@ func TestMergeSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			tt.args.array = MergeSort(tt.args.array)
+			SelectionSort(tt.args.array)
 			confirmed := true
 			for i := 0; i < len(tt.args.array); i++ {
 				if tt.args.array[i] != tt.want[i] {
@@ -42,7 +42,7 @@ func TestMergeSort(t *testing.T) {
 				}
 			}
 			if !confirmed {
-				t.Errorf("MergeSort() = %+v,\n want %+v", tt.args.array, tt.want)
+				t.Errorf("SelectionSort() = %+v,\n want %+v", tt.args.array, tt.want)
 			}
 		})
 	}

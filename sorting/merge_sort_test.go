@@ -1,16 +1,8 @@
-package sort
+package sorting
 
-import (
-	"math/rand"
-	"testing"
-	"time"
-)
+import "testing"
 
-func init() {
-	rand.Seed(time.Now().UnixNano())
-}
-
-func TestQuickSort(t *testing.T) {
+func TestMergeSort(t *testing.T) {
 	type args struct {
 		array []int
 	}
@@ -42,7 +34,7 @@ func TestQuickSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			QuickSort(tt.args.array)
+			tt.args.array = MergeSort(tt.args.array)
 			confirmed := true
 			for i := 0; i < len(tt.args.array); i++ {
 				if tt.args.array[i] != tt.want[i] {
@@ -50,7 +42,7 @@ func TestQuickSort(t *testing.T) {
 				}
 			}
 			if !confirmed {
-				t.Errorf("QuickSort() = %+v,\n want %+v", tt.args.array, tt.want)
+				t.Errorf("MergeSort() = %+v,\n want %+v", tt.args.array, tt.want)
 			}
 		})
 	}

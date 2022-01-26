@@ -1,4 +1,4 @@
-package sort
+package sorting
 
 // SelectionSort 选择排序
 func SelectionSort(array []int) {

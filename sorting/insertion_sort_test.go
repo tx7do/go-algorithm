@@ -1,8 +1,8 @@
-package sort
+package sorting
 
 import "testing"
 
-func TestBubbleSort(t *testing.T) {
+func TestInsertionSort(t *testing.T) {
 	type args struct {
 		array []int
 	}
@@ -34,7 +34,7 @@ func TestBubbleSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			BubbleSort(tt.args.array)
+			InsertionSort(tt.args.array)
 			confirmed := true
 			for i := 0; i < len(tt.args.array); i++ {
 				if tt.args.array[i] != tt.want[i] {
@@ -42,7 +42,7 @@ func TestBubbleSort(t *testing.T) {
 				}
 			}
 			if !confirmed {
-				t.Errorf("BubbleSort() = %+v,\n want %+v", tt.args.array, tt.want)
+				t.Errorf("InsertionSort() = %+v,\n want %+v", tt.args.array, tt.want)
 			}
 		})
 	}
