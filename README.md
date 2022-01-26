@@ -15,6 +15,7 @@
 ## Sort Algorithm
 
 - [x] 冒泡排序（Bubble Sort）
+- [ ] 鸡尾酒排序（Cocktail Sort）
 - [x] 选择排序（Selection Sort）
 - [x] 插入排序（Insertion Sort）
 - [x] 归并排序（Merge Sort）
@@ -25,7 +26,6 @@
 - [x] 计数排序（Counting Sort）
 - [ ] 基数排序（Radix Sort）
 - [x] 桶排序（Bucket Sort）
-- [ ] 鸡尾酒排序（Cocktail Sort）
 - [ ] 二叉排序树排序（Binary Tree Sort）
 - [ ] 鸽巢排序（Pigeonhole Sort）
 - [ ] 侏儒排序（Gnome Sort）
