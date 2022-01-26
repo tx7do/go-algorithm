@@ -6,13 +6,13 @@ import (
 )
 
 func TestExponentialSearchSingle(t *testing.T) {
-	//assert.Equal(t, ExponentialSearch([]int{1, 10, 20, 30, 40, 50, 60}, 10), 1)
-	assert.Equal(t, ExponentialSearch([]int{1, 10, 20, 30, 40, 50, 60}, 60), 6)
+	//assert.Equal(t, ExponentialSearch(IntSlice{1, 10, 20, 30, 40, 50, 60}, 10), 1)
+	assert.Equal(t, ExponentialSearch(IntSlice{1, 10, 20, 30, 40, 50, 60}, 60), 6)
 }
 
 func TestExponentialSearch(t *testing.T) {
 	type args struct {
-		array  []int
+		array  IntSlice
 		target int
 	}
 	tests := []struct {
@@ -22,47 +22,47 @@ func TestExponentialSearch(t *testing.T) {
 	}{
 		{
 			name: "test0",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: 10},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: 10},
 			want: 1,
 		},
 		{
 			name: "test1",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: 1},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: 1},
 			want: 0,
 		},
 		{
 			name: "test2",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: 50},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: 50},
 			want: 5,
 		},
 		{
 			name: "test3",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: 60},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: 60},
 			want: 6,
 		},
 		{
 			name: "test4",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: 61},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: 61},
 			want: -1,
 		},
 		{
 			name: "test5",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: 2},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: 2},
 			want: -1,
 		},
 		{
 			name: "test6",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: 59},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: 59},
 			want: -1,
 		},
 		{
 			name: "test7",
-			args: args{array: []int{1, 10, 20, 30, 40, 50, 60}, target: -1},
+			args: args{array: IntSlice{1, 10, 20, 30, 40, 50, 60}, target: -1},
 			want: -1,
 		},
 		{
 			name: "test8",
-			args: args{array: []int{}, target: -1},
+			args: args{array: IntSlice{}, target: -1},
 			want: -1,
 		},
 	}

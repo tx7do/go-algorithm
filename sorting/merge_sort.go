@@ -3,23 +3,30 @@ package sorting
 import "math"
 
 // MergeSort 归并排序
-func MergeSort(array []int) []int {
-	length := len(array)
+// @see https://en.wikipedia.org/wiki/Merge_sort
+func MergeSort(array IntSlice) IntSlice {
+	length := array.Len()
 	if length < 2 {
 		return array
 	}
 
 	mid := int(math.Floor(float64(length >> 1)))
-	first := MergeSort(array[:mid])
-	second := MergeSort(array[mid:])
-	return merge(first, second)
+
+	left := MergeSort(array[:mid])
+	right := MergeSort(array[mid:])
+
+	return merge(left, right)
 }
 
-func merge(left, right []int) []int {
-	var result = make([]int, 0, len(left)+len(right))
+// merge 归并
+func merge(left, right IntSlice) IntSlice {
+	lengthLeft := left.Len()
+	lengthRight := right.Len()
+
+	var result = make(IntSlice, 0, lengthLeft+lengthRight)
 
 	i, j := 0, 0
-	for i < len(left) && j < len(right) {
+	for i < lengthLeft && j < lengthRight {
 		if left[i] < right[j] {
 			result = append(result, left[i])
 			i++

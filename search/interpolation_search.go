@@ -1,12 +1,13 @@
 package search
 
 // InterpolationSearch 插值查找
-func InterpolationSearch(array []int, target int) int {
-	if len(array) == 0 {
+func InterpolationSearch(array IntSlice, target int) int {
+	length := array.Len()
+	if length == 0 {
 		return -1
 	}
 
-	low, high := 0, len(array)-1
+	low, high := 0, length-1
 
 	var mid = 0
 	for array[low] < target && array[high] > target {

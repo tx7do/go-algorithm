@@ -2,16 +2,15 @@ package search
 
 import algorithm "go-algorithm"
 
-func ExponentialSearch(array []int, target int) int {
-	if len(array) == 0 {
+func ExponentialSearch(array IntSlice, target int) int {
+	length := array.Len()
+	if length == 0 {
 		return -1
 	}
 
 	if array[0] == target {
 		return 0
 	}
-
-	length := len(array)
 
 	if array[length-1] == target {
 		return length - 1

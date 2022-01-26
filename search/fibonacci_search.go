@@ -3,12 +3,13 @@ package search
 import algorithm "go-algorithm"
 
 // FibonacciSearch 斐波那查找
-func FibonacciSearch(array []int, target int) int {
-	if len(array) == 0 {
+func FibonacciSearch(array IntSlice, target int) int {
+	length := array.Len()
+	if length == 0 {
 		return -1
 	}
 
-	high := len(array) - 1
+	high := length - 1
 	max := array[high]
 
 	fibMMm2 := 0              // (m-2)'th Fibonacci No.

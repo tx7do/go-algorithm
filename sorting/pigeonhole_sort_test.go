@@ -1,8 +1,16 @@
 package sorting
 
-import "testing"
+import (
+	"math/rand"
+	"testing"
+	"time"
+)
 
-func TestInsertionSort(t *testing.T) {
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+func TestPigeonholeSort(t *testing.T) {
 	type args struct {
 		array IntSlice
 	}
@@ -31,10 +39,20 @@ func TestInsertionSort(t *testing.T) {
 			args: args{array: IntSlice{55, 90, 74, 20, 16, 46, 43, 59, 2, 99, 79, 10, 73, 1, 68, 56, 3, 87, 40, 78, 14, 18, 51, 24, 57, 89, 4, 62, 53, 23, 93, 41, 95, 84, 88}},
 			want: IntSlice{1, 2, 3, 4, 10, 14, 16, 18, 20, 23, 24, 40, 41, 43, 46, 51, 53, 55, 56, 57, 59, 62, 68, 73, 74, 78, 79, 84, 87, 88, 89, 90, 93, 95, 99},
 		},
+		{
+			name: "sort-5",
+			args: args{array: IntSlice{1, 4, 2, 5, 67, 86, 24, 63, 676, 23, 1, 3, 2, 34}},
+			want: IntSlice{1, 1, 2, 2, 3, 4, 5, 23, 24, 34, 63, 67, 86, 676},
+		},
+		{
+			name: "sort-6",
+			args: args{array: IntSlice{802, 630, 20, 745, 52, 300, 612, 932, 78, 187}},
+			want: IntSlice{20, 52, 78, 187, 300, 612, 630, 745, 802, 932},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			InsertionSort(tt.args.array)
+			PigeonholeSort(tt.args.array)
 			confirmed := true
 			for i := 0; i < tt.args.array.Len(); i++ {
 				if tt.args.array[i] != tt.want[i] {
@@ -42,7 +60,7 @@ func TestInsertionSort(t *testing.T) {
 				}
 			}
 			if !confirmed {
-				t.Errorf("InsertionSort() = %+v,\n want %+v", tt.args.array, tt.want)
+				t.Errorf("PigeonholeSort() = %+v,\n want %+v", tt.args.array, tt.want)
 			}
 		})
 	}

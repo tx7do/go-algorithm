@@ -6,12 +6,12 @@ import (
 )
 
 // JumpSearch 分块查找/跳点查找/跳跃查找
-func JumpSearch(array []int, target int) int {
-	if len(array) == 0 {
+func JumpSearch(array IntSlice, target int) int {
+	length := array.Len()
+	if length == 0 {
 		return -1
 	}
 
-	length := len(array)
 	step := int(math.Sqrt(float64(length)))
 
 	prev := 0

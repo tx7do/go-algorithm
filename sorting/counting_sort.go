@@ -1,34 +1,33 @@
 package sorting
 
 import (
-	algorithm "go-algorithm"
 	"math"
 )
 
 // CountingSort 计数排序
-func CountingSort(array []int) {
-	length := len(array)
+func CountingSort(array IntSlice) {
+	length := array.Len()
 	if length < 2 {
 		return
 	}
 
 	maxValue := array[0]
-	for _, val := range array {
-		maxValue = algorithm.Max(maxValue, val)
-		if val < 0 {
-			return
+	i := 0
+	for i = 1; i < length; i++ {
+		if array[i] > maxValue {
+			maxValue = array[i]
 		}
 	}
 
 	bucketLen := maxValue + 1
-	bucket := make([]int, bucketLen)
+	bucket := make(IntSlice, bucketLen)
 
 	for _, val := range array {
 		bucket[val]++
 	}
 
 	sortedIndex := 0
-	for i := 0; i < bucketLen; i++ {
+	for i = 0; i < bucketLen; i++ {
 		for bucket[i] > 0 {
 			array[sortedIndex] = i
 			sortedIndex++
@@ -38,27 +37,31 @@ func CountingSort(array []int) {
 }
 
 // CountingSortNegative 计数排序 - 可以处理负数的版本
-func CountingSortNegative(array []int) {
-	length := len(array)
+func CountingSortNegative(array IntSlice) {
+	length := array.Len()
 	if length < 2 {
 		return
 	}
 
-	maxValue := array[0]
-	minValue := array[0]
-	for _, val := range array {
-		minValue = algorithm.Min(minValue, val)
-		maxValue = algorithm.Max(maxValue, val)
+	minValue, maxValue := array[0], array[0]
+	i := 0
+	for i = 1; i < length; i++ {
+		if array[i] < minValue {
+			minValue = array[i]
+		}
+		if array[i] > maxValue {
+			maxValue = array[i]
+		}
 	}
 
 	bucketLen := maxValue + 1
-	bucket := make([]int, bucketLen)
+	bucket := make(IntSlice, bucketLen)
 
 	negativeBucketLen := 0
 	if minValue < 0 {
 		negativeBucketLen = int(math.Abs(float64(minValue))) + 1
 	}
-	negativeBucket := make([]int, negativeBucketLen)
+	negativeBucket := make(IntSlice, negativeBucketLen)
 
 	for _, val := range array {
 		if val >= 0 {
@@ -69,7 +72,7 @@ func CountingSortNegative(array []int) {
 	}
 
 	sortedIndex := 0
-	for i := negativeBucketLen - 1; i >= 0; i-- {
+	for i = negativeBucketLen - 1; i >= 0; i-- {
 		for negativeBucket[i] > 0 {
 			array[sortedIndex] = -i
 			sortedIndex++
@@ -77,7 +80,7 @@ func CountingSortNegative(array []int) {
 		}
 	}
 
-	for i := 0; i < bucketLen; i++ {
+	for i = 0; i < bucketLen; i++ {
 		for bucket[i] > 0 {
 			array[sortedIndex] = i
 			sortedIndex++

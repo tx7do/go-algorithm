@@ -1,8 +1,8 @@
 package sorting
 
 // SelectionSort 选择排序
-func SelectionSort(array []int) {
-	length := len(array)
+func SelectionSort(array IntSlice) {
+	length := array.Len()
 	if length < 2 {
 		return
 	}
@@ -16,6 +16,7 @@ func SelectionSort(array []int) {
 				minIndex = j
 			}
 		}
-		array[i], array[minIndex] = array[minIndex], array[i]
+		array.Swap(i, minIndex)
+		//array[i], array[minIndex] = array[minIndex], array[i]
 	}
 }

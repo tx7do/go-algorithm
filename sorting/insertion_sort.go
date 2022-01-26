@@ -1,8 +1,8 @@
 package sorting
 
 // InsertionSort 插入排序
-func InsertionSort(array []int) {
-	length := len(array)
+func InsertionSort(array IntSlice) {
+	length := array.Len()
 	if length < 2 {
 		return
 	}

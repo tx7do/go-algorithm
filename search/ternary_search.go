@@ -1,12 +1,13 @@
 package search
 
 // TernarySearch 三叉树查找
-func TernarySearch(array []int, target int) int {
-	if len(array) == 0 {
+func TernarySearch(array IntSlice, target int) int {
+	length := array.Len()
+	if length == 0 {
 		return -1
 	}
 
-	low, high := 0, len(array)-2
+	low, high := 0, length-2
 	mid1, mid2 := 0, 0
 	for low <= high {
 		mid1 = low + (high-low)/3

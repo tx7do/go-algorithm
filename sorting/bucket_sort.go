@@ -1,30 +1,33 @@
 package sorting
 
 import (
-	algorithm "go-algorithm"
 	"math"
 )
 
 const DefaultBucketSize = 5
 
 // BucketSort 桶排序
-func BucketSort(array []int) {
-	length := len(array)
+func BucketSort(array IntSlice) {
+	length := array.Len()
 	if length < 2 {
 		return
 	}
 
-	maxValue := array[0]
-	minValue := array[0]
-	for _, val := range array {
-		minValue = algorithm.Min(minValue, val)
-		maxValue = algorithm.Max(maxValue, val)
+	minValue, maxValue := array[0], array[0]
+	i := 0
+	for i = 1; i < length; i++ {
+		if array[i] < minValue {
+			minValue = array[i]
+		}
+		if array[i] > maxValue {
+			maxValue = array[i]
+		}
 	}
 
 	bucketSize := DefaultBucketSize
 	bucketCount := int(math.Floor(float64((maxValue-minValue)/bucketSize))) + 1
-	buckets := make([][]int, bucketCount)
-	for i := 0; i < length; i++ {
+	buckets := make([]IntSlice, bucketCount)
+	for i = 0; i < length; i++ {
 		bucketIndex := int(math.Floor(float64((array[i] - minValue) / bucketSize)))
 		buckets[bucketIndex] = append(buckets[bucketIndex], array[i])
 	}
