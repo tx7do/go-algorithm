@@ -44,6 +44,11 @@ func TestRadixSort(t *testing.T) {
 			args: args{array: IntSlice{802, 630, 20, 745, 52, 300, 612, 932, 78, 187}},
 			want: IntSlice{20, 52, 78, 187, 300, 612, 630, 745, 802, 932},
 		},
+		{
+			name: "sort-5",
+			args: args{array: []int{802, 630, 20, 745, 52, 300, 612, 932, 78, 187}},
+			want: []int{20, 52, 78, 187, 300, 612, 630, 745, 802, 932},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
