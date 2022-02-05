@@ -7,37 +7,45 @@ import (
 
 // BinaryTreeSort 二叉树排序
 // @see https://en.wikipedia.org/wiki/Tree_sort
-func BinaryTreeSort(array IntSlice) {
-	length := array.Len()
+func BinaryTreeSort(array Interface, begin, end int) {
+	length := end - begin + 1
 	if length < 2 {
 		return
 	}
 
-	i := 0
-
-	// Construct the BST
 	tree := &binaryTree{}
-	for ; i < length; i++ {
-		tree.insert(array[i])
+
+	for i := begin; i <= end; i++ {
+		tree.insert(array.Get(i))
 	}
 
-	// Store inorder traversal of the BST
-	i = 0
-	storeSorted(tree.root, array, &i)
+	tree.inOrder(array)
 }
 
 type binaryNode struct {
+	data  interface{}
 	left  *binaryNode
 	right *binaryNode
-	data  int
 }
 
 type binaryTree struct {
 	root *binaryNode
 }
 
-// insert a binary node into tree
-func (t *binaryTree) insert(data int) *binaryTree {
+func (t *binaryTree) inOrder(array Interface) {
+	if t.root != nil {
+		i := 0
+		t.root.inOrder(array, &i)
+	}
+}
+
+// print the binary tree
+func (t *binaryTree) print(w io.Writer) {
+	t.root.print(w, 0, 'M')
+}
+
+// insert a binary tree Node into tree
+func (t *binaryTree) insert(data interface{}) *binaryTree {
 	if t.root == nil {
 		t.root = &binaryNode{data: data, left: nil, right: nil}
 	} else {
@@ -46,11 +54,11 @@ func (t *binaryTree) insert(data int) *binaryTree {
 	return t
 }
 
-// insert a binary node into node
-func (n *binaryNode) insert(data int) {
+// insert a binary tree Node into Node
+func (n *binaryNode) insert(data interface{}) {
 	if n == nil {
 		return
-	} else if data <= n.data {
+	} else if Less(data, n.data) {
 		if n.left == nil {
 			n.left = &binaryNode{data: data, left: nil, right: nil}
 		} else {
@@ -65,28 +73,39 @@ func (n *binaryNode) insert(data int) {
 	}
 }
 
-// storeSorted Stores inorder traversal of the BST
-func storeSorted(node *binaryNode, array IntSlice, i *int) {
-	if node == nil {
+// inOrder traversal of the BST
+func (n *binaryNode) inOrder(array Interface, i *int) {
+	if n == nil {
 		return
 	}
 
-	storeSorted(node.left, array, i)
-	array[*i] = node.data
+	if n.left != nil {
+		n.left.inOrder(array, i)
+	}
+
+	array.Set(*i, n.data)
 	*i++
-	storeSorted(node.right, array, i)
+
+	if n.right != nil {
+		n.right.inOrder(array, i)
+	}
 }
 
-// printTree print the BST
-func printTree(w io.Writer, node *binaryNode, ns int, ch rune) {
-	if node == nil {
+// print the BST
+func (n *binaryNode) print(w io.Writer, ns int, ch rune) {
+	if n == nil {
 		return
 	}
 
 	for i := 0; i < ns; i++ {
 		_, _ = fmt.Fprint(w, " ")
 	}
-	_, _ = fmt.Fprintf(w, "%c:%v\n", ch, node.data)
-	printTree(w, node.left, ns+2, 'L')
-	printTree(w, node.right, ns+2, 'R')
+	_, _ = fmt.Fprintf(w, "%c:%v\n", ch, n.data)
+
+	if n.left != nil {
+		n.left.print(w, ns+2, 'L')
+	}
+	if n.right != nil {
+		n.right.print(w, ns+2, 'R')
+	}
 }

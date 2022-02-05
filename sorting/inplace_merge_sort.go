@@ -6,42 +6,40 @@ import (
 
 // InPlaceMergeSort 原地归并排序
 // @see https://en.wikipedia.org/wiki/Merge_sort
-func InPlaceMergeSort(array IntSlice) {
-	length := array.Len()
-	if length < 2 {
-		return
+// @see https://www.geeksforgeeks.org/in-place-merge-sort/
+func InPlaceMergeSort(array Interface, begin, end int) {
+	if begin < end {
+		mid := int(math.Floor(float64(begin + (end-begin)>>1)))
+
+		InPlaceMergeSort(array, begin, mid)
+		InPlaceMergeSort(array, mid+1, end)
+
+		inPlaceMerge(array, begin, mid, end)
 	}
-
-	mid := int(math.Floor(float64(length >> 1)))
-
-	InPlaceMergeSort(array[:mid])
-	InPlaceMergeSort(array[mid:])
-
-	inPlaceMerge(array, mid)
 }
 
 // inPlaceMerge 原地归并
-func inPlaceMerge(array IntSlice, mid int) {
-	indexLeft, indexRight := 0, mid
-	endLeft, endRight := mid-1, array.Len()-1
+func inPlaceMerge(array Interface, begin, mid, end int) {
+	indexLeft, indexRight := begin, mid+1
+	endLeft, endRight := mid, end
 
-	if array[endLeft] <= array[indexRight] {
+	if array.Less(endLeft, indexRight) {
 		return
 	}
 
-	sortedIndex, tempValue := 0, 0
+	sortedIndex := 0
 	for indexLeft <= endLeft && indexRight <= endRight {
-		if array[indexLeft] <= array[indexRight] {
+		if array.Less(indexLeft, indexRight) {
 			indexLeft++
 		} else {
-			tempValue = array[indexRight]
+			tempValue := array.Get(indexRight)
 			sortedIndex = indexRight
 
 			for sortedIndex != indexLeft {
-				array[sortedIndex] = array[sortedIndex-1]
+				array.Swap(sortedIndex, sortedIndex-1)
 				sortedIndex--
 			}
-			array[indexLeft] = tempValue
+			array.Set(indexLeft, tempValue)
 
 			indexLeft++
 			endLeft++

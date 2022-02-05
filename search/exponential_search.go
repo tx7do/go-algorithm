@@ -3,7 +3,7 @@ package search
 import algorithm "go-algorithm"
 
 func ExponentialSearch(array IntSlice, target int) int {
-	length := array.Len()
+	length := end - begin + 1
 	if length == 0 {
 		return -1
 	}

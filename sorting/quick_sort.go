@@ -1,31 +1,27 @@
 package sorting
 
-import "math/rand"
-
 // QuickSort 快速排序
-func QuickSort(array IntSlice) {
-	length := array.Len()
-	if length < 2 {
-		return
+// @see https://en.wikipedia.org/wiki/Quicksort
+// @see https://www.eecs.yorku.ca/course_archive/2010-11/W/2011/Notes/s4_quick_sort.pdf
+func QuickSort(array Interface, begin, end int) {
+	if begin < end {
+		pi := quickSortPartition(array, begin, end)
+		QuickSort(array, begin, pi-1)
+		QuickSort(array, pi+1, end)
 	}
+}
 
-	low, high := 0, length-1
+func quickSortPartition(array Interface, begin, end int) int {
+	pivot := array.Get(end)
+	pi := begin - 1
 
-	pivot := rand.Int() % array.Len()
-	array.Swap(pivot, high)
-	//array[pivot], array[high] = array[high], array[pivot]
-
-	for i := range array {
-		if array[i] < array[high] {
-			array.Swap(low, i)
-			//array[low], array[i] = array[i], array[low]
-			low++
+	for i := begin; i < end; i++ {
+		if Less(array.Get(i), pivot) {
+			pi++
+			array.Swap(pi, i)
 		}
 	}
+	array.Swap(pi+1, end)
 
-	//array[low], array[high] = array[high], array[low]
-	array.Swap(low, high)
-
-	QuickSort(array[:low])
-	QuickSort(array[low+1:])
+	return pi + 1
 }

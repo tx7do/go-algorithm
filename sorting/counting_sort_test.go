@@ -39,7 +39,7 @@ func TestCountingSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			CountingSort(tt.args.array)
+			CountingSort(tt.args.array, 0, tt.args.array.Len()-1)
 			confirmed := true
 			for i := 0; i < tt.args.array.Len(); i++ {
 				if tt.args.array[i] != tt.want[i] {
@@ -85,7 +85,7 @@ func TestCountingSortNegative(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			CountingSortNegative(tt.args.array)
+			CountingSortNegative(tt.args.array, 0, tt.args.array.Len()-1)
 			confirmed := true
 			for i := 0; i < tt.args.array.Len(); i++ {
 				if tt.args.array[i] != tt.want[i] {

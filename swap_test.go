@@ -39,3 +39,11 @@ func TestSwapReturn(t *testing.T) {
 	assert.Equal(t, a, 6)
 	assert.Equal(t, b, 3)
 }
+
+func TestSwapRange(t *testing.T) {
+	arr := []int{6, 7, 8, 9, 10, 1, 2, 3, 4, 5}
+	SwapRange(arr, 0, 5, 5)
+	for i := 0; i < 10; i++ {
+		assert.Equal(t, arr[i], i+1)
+	}
+}

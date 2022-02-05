@@ -33,3 +33,10 @@ func SwapTemp(a, b *int) {
 	*a = *b
 	*b = temp
 }
+
+// SwapRange 区间交换
+func SwapRange(data []int, a, b, n int) {
+	for i := 0; i < n; i++ {
+		Swap(&data[a+i], &data[b+i])
+	}
+}

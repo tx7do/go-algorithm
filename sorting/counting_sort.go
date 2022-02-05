@@ -5,15 +5,15 @@ import (
 )
 
 // CountingSort 计数排序
-func CountingSort(array IntSlice) {
-	length := array.Len()
+func CountingSort(array IntSlice, begin, end int) {
+	length := end - begin + 1
 	if length < 2 {
 		return
 	}
 
-	maxValue := array[0]
+	maxValue := array[begin]
 	i := 0
-	for i = 1; i < length; i++ {
+	for i = begin + 1; i <= end; i++ {
 		if array[i] > maxValue {
 			maxValue = array[i]
 		}
@@ -22,8 +22,8 @@ func CountingSort(array IntSlice) {
 	bucketLen := maxValue + 1
 	bucket := make(IntSlice, bucketLen)
 
-	for _, val := range array {
-		bucket[val]++
+	for i = begin; i <= end; i++ {
+		bucket[array[i]]++
 	}
 
 	sortedIndex := 0
@@ -37,15 +37,15 @@ func CountingSort(array IntSlice) {
 }
 
 // CountingSortNegative 计数排序 - 可以处理负数的版本
-func CountingSortNegative(array IntSlice) {
-	length := array.Len()
+func CountingSortNegative(array IntSlice, begin, end int) {
+	length := end - begin + 1
 	if length < 2 {
 		return
 	}
 
-	minValue, maxValue := array[0], array[0]
+	minValue, maxValue := array[begin], array[begin]
 	i := 0
-	for i = 1; i < length; i++ {
+	for i = begin + 1; i <= end; i++ {
 		if array[i] < minValue {
 			minValue = array[i]
 		}
@@ -63,11 +63,11 @@ func CountingSortNegative(array IntSlice) {
 	}
 	negativeBucket := make(IntSlice, negativeBucketLen)
 
-	for _, val := range array {
-		if val >= 0 {
-			bucket[val]++
+	for i = begin; i <= end; i++ {
+		if array[i] >= 0 {
+			bucket[array[i]]++
 		} else {
-			negativeBucket[int(math.Abs(float64(val)))]++
+			negativeBucket[int(math.Abs(float64(array[i])))]++
 		}
 	}
 

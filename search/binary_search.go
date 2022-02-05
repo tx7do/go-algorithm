@@ -2,7 +2,7 @@ package search
 
 // BinarySearch 二分查找
 func BinarySearch(array IntSlice, target int) int {
-	length := array.Len()
+	length := end - begin + 1
 	if length == 0 {
 		return -1
 	}
@@ -25,7 +25,7 @@ func BinarySearch(array IntSlice, target int) int {
 
 // LowerBound 二分查找第一个元素的位置
 func LowerBound(array IntSlice, target int) int {
-	length := array.Len()
+	length := end - begin + 1
 	if length == 0 {
 		return -1
 	}
@@ -45,7 +45,7 @@ func LowerBound(array IntSlice, target int) int {
 
 // UpperBound 二分查找第一个大于该元素的位置
 func UpperBound(array IntSlice, target int) int {
-	length := array.Len()
+	length := end - begin + 1
 	if length == 0 {
 		return -1
 	}

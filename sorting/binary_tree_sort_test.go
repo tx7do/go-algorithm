@@ -25,7 +25,7 @@ func TestBinaryTree(t *testing.T) {
 		insert(15).
 		insert(5).
 		insert(-10)
-	printTree(os.Stdout, tree.root, 0, 'M')
+	tree.print(os.Stdout)
 }
 
 func TestBinaryTreeSort(t *testing.T) {
@@ -70,7 +70,7 @@ func TestBinaryTreeSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			BinaryTreeSort(tt.args.array)
+			BinaryTreeSort(tt.args.array, 0, tt.args.array.Len()-1)
 			confirmed := true
 			for i := 0; i < tt.args.array.Len(); i++ {
 				if tt.args.array[i] != tt.want[i] {

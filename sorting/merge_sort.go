@@ -1,42 +1,62 @@
 package sorting
 
-import "math"
+import (
+	"math"
+)
 
 // MergeSort 归并排序
 // @see https://en.wikipedia.org/wiki/Merge_sort
-func MergeSort(array IntSlice) IntSlice {
-	length := array.Len()
+// @see https://www.enjoyalgorithms.com/blog/merge-sort-algorithm
+// @see https://qvault.io/golang/merge-sort-golang/
+func MergeSort(array Interface, begin, end int) {
+	length := end - begin + 1
 	if length < 2 {
+		return
+	}
+
+	tmp := mergeSort(array.Part(begin, end+1))
+	for i := 0; i < length; i++ {
+		array.Set(i, tmp.Get(i))
+	}
+}
+
+func mergeSort(array Interface) Interface {
+	if array.Len() < 2 {
 		return array
 	}
 
-	mid := int(math.Floor(float64(length >> 1)))
+	mid := int(math.Floor(float64(array.Len() >> 1)))
 
-	left := MergeSort(array[:mid])
-	right := MergeSort(array[mid:])
+	left := mergeSort(array.Part(0, mid))
+	right := mergeSort(array.Part(mid, array.Len()))
 
-	return merge(left, right)
+	return spaceMerge(left, right)
 }
 
-// merge 归并
-func merge(left, right IntSlice) IntSlice {
+// spaceMerge 归并
+func spaceMerge(left, right Interface) Interface {
 	lengthLeft := left.Len()
 	lengthRight := right.Len()
 
-	var result = make(IntSlice, 0, lengthLeft+lengthRight)
+	var result = make(InterfaceSlice, 0, lengthLeft+lengthRight)
 
 	i, j := 0, 0
 	for i < lengthLeft && j < lengthRight {
-		if left[i] < right[j] {
-			result = append(result, left[i])
+		if Less(left.Get(i), right.Get(j)) {
+			result = append(result, left.Get(i))
 			i++
 		} else {
-			result = append(result, right[j])
+			result = append(result, right.Get(j))
 			j++
 		}
 	}
 
-	result = append(result, left[i:]...)
-	result = append(result, right[j:]...)
+	for ; i < lengthLeft; i++ {
+		result = append(result, left.Get(i))
+	}
+	for ; j < lengthRight; j++ {
+		result = append(result, right.Get(j))
+	}
+
 	return result
 }

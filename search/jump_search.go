@@ -7,7 +7,7 @@ import (
 
 // JumpSearch 分块查找/跳点查找/跳跃查找
 func JumpSearch(array IntSlice, target int) int {
-	length := array.Len()
+	length := end - begin + 1
 	if length == 0 {
 		return -1
 	}

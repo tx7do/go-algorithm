@@ -1,20 +1,16 @@
 package sorting
 
 // InsertionSort 插入排序
-func InsertionSort(array IntSlice) {
-	length := array.Len()
+func InsertionSort(array Interface, begin, end int) {
+	length := end - begin + 1
 	if length < 2 {
 		return
 	}
 
-	i, preIndex, current := 0, 0, 0
-	for i = 1; i < length; i++ {
-		preIndex = i - 1
-		current = array[i]
-		for preIndex >= 0 && array[preIndex] > current {
-			array[preIndex+1] = array[preIndex]
-			preIndex--
+	i, j := begin+1, 0
+	for ; i <= end; i++ {
+		for j = i; j > 0 && array.Less(j, j-1); j-- {
+			array.Swap(j, j-1)
 		}
-		array[preIndex+1] = current
 	}
 }

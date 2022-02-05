@@ -3,16 +3,16 @@ package sorting
 // PigeonholeSort 鸽巢排序
 // @see https://en.wikipedia.org/wiki/Pigeonhole_sort
 // @see https://zh.wikipedia.org/wiki/%E9%B8%BD%E5%B7%A2%E6%8E%92%E5%BA%8F
-func PigeonholeSort(array IntSlice) {
-	length := array.Len()
+func PigeonholeSort(array IntSlice, begin, end int) {
+	length := end - begin + 1
 	if length < 2 {
 		return
 	}
 
 	i := 0
 
-	minValue, maxValue := array[0], array[0]
-	for i = 1; i < length; i++ {
+	minValue, maxValue := array[begin], array[begin]
+	for i = begin + 1; i <= end; i++ {
 		if array[i] < minValue {
 			minValue = array[i]
 		}
@@ -23,7 +23,7 @@ func PigeonholeSort(array IntSlice) {
 
 	holeRange := maxValue - minValue + 1
 	holes := make([]IntSlice, holeRange)
-	for i = 0; i < length; i++ {
+	for i = begin; i <= end; i++ {
 		holes[array[i]-minValue] = append(holes[array[i]-minValue], array[i])
 	}
 

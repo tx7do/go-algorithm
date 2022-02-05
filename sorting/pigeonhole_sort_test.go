@@ -52,7 +52,7 @@ func TestPigeonholeSort(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			PigeonholeSort(tt.args.array)
+			PigeonholeSort(tt.args.array, 0, tt.args.array.Len()-1)
 			confirmed := true
 			for i := 0; i < tt.args.array.Len(); i++ {
 				if tt.args.array[i] != tt.want[i] {

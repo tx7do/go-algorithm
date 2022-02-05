@@ -2,7 +2,7 @@ package search
 
 // LinearSearch 顺序查找
 func LinearSearch(array IntSlice, target int) int {
-	length := array.Len()
+	length := end - begin + 1
 	if length == 0 {
 		return -1
 	}
