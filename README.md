@@ -27,7 +27,7 @@
 3. 插入排序类型（Insertion sorts）
 - [x] 插入排序（Insertion Sort）
 - [x] 希尔排序（Shell Sort）  
-- [ ] 二叉树排序（Binary Tree Sort）
+- [x] 二叉树排序（Binary Tree Sort）
 
 4. 归并排序类型（Merge sorts）
 - [x] 归并排序（Merge Sort）
