@@ -1,5 +1,7 @@
 package sorting
 
+import "math"
+
 const (
 	AscendingOrder  bool = true
 	DescendingOrder bool = false
@@ -163,7 +165,7 @@ func merge(array Interface, left, mid, right int) {
 	}
 }
 
-func Less(i, j interface{}) bool {
+func less(i, j interface{}) bool {
 	switch t := i.(type) {
 	case int:
 		return t < j.(int)
@@ -175,7 +177,7 @@ func Less(i, j interface{}) bool {
 	return false
 }
 
-func Plus(i, j interface{}) int {
+func plus(i, j interface{}) int {
 	switch t := i.(type) {
 	case int:
 		return t + j.(int)
@@ -186,7 +188,7 @@ func Plus(i, j interface{}) int {
 	}
 	return 0
 }
-func Minus(i, j interface{}) int {
+func minus(i, j interface{}) int {
 	switch t := i.(type) {
 	case int:
 		return t - j.(int)
@@ -197,7 +199,7 @@ func Minus(i, j interface{}) int {
 	}
 	return 0
 }
-func Multi(i, j interface{}) int {
+func multi(i, j interface{}) int {
 	switch t := i.(type) {
 	case int:
 		return t * j.(int)
@@ -207,4 +209,16 @@ func Multi(i, j interface{}) int {
 		return 0
 	}
 	return 0
+}
+
+func powerOfTwo(n int) int {
+	return int(math.Floor(float64(n >> 1)))
+}
+
+func greatestPowerOfTwoLessThan(n int) int {
+	k := 1
+	for k < n {
+		k = k << 1
+	}
+	return k >> 1
 }

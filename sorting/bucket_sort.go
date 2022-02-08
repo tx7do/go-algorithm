@@ -18,20 +18,20 @@ func BucketSort(array Interface, begin, end int) {
 	minValue, maxValue := array.Get(begin), array.Get(begin)
 	i := 0
 	for i = begin + 1; i <= end; i++ {
-		if Less(array.Get(i), minValue) {
+		if less(array.Get(i), minValue) {
 			minValue = array.Get(i)
 		}
-		if Less(maxValue, array.Get(i)) {
+		if less(maxValue, array.Get(i)) {
 			maxValue = array.Get(i)
 		}
 	}
 
 	bucketSize := DefaultBucketSize
-	bucketCount := int(math.Floor(float64(Minus(maxValue, minValue)/bucketSize))) + 1
+	bucketCount := int(math.Floor(float64(minus(maxValue, minValue)/bucketSize))) + 1
 	buckets := make([]InterfaceSlice, bucketCount)
 
 	for i = begin; i <= end; i++ {
-		bucketIndex := int(math.Floor(float64(Minus(array.Get(i), minValue) / bucketSize)))
+		bucketIndex := int(math.Floor(float64(minus(array.Get(i), minValue) / bucketSize)))
 		buckets[bucketIndex] = append(buckets[bucketIndex], array.Get(i))
 	}
 

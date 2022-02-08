@@ -42,7 +42,7 @@ func spaceMerge(left, right Interface) Interface {
 
 	i, j := 0, 0
 	for i < lengthLeft && j < lengthRight {
-		if Less(left.Get(i), right.Get(j)) {
+		if less(left.Get(i), right.Get(j)) {
 			result = append(result, left.Get(i))
 			i++
 		} else {

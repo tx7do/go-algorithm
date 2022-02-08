@@ -17,12 +17,12 @@ func BeadSort(array Interface, begin, end int) {
 	maxValue := array.Get(begin).(int)
 	i, j := 0, 0
 	for i = begin + 1; i <= end; i++ {
-		if Less(maxValue, array.Get(i)) {
+		if less(maxValue, array.Get(i)) {
 			maxValue = array.Get(i).(int)
 		}
 	}
 
-	beadLen := Multi(maxValue, length)
+	beadLen := multi(maxValue, length)
 	beads := make(beadSlice, beadLen)
 
 	for i = begin; i <= end; i++ {
