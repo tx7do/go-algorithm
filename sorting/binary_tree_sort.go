@@ -58,7 +58,7 @@ func (t *binaryTree) insert(data interface{}) *binaryTree {
 func (n *binaryNode) insert(data interface{}) {
 	if n == nil {
 		return
-	} else if Less(data, n.data) {
+	} else if less(data, n.data) {
 		if n.left == nil {
 			n.left = &binaryNode{data: data, left: nil, right: nil}
 		} else {

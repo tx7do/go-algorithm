@@ -49,7 +49,7 @@ func (t *splayTree) insert(data interface{}) *splayTree {
 		temp := t.root
 
 		for temp != nil {
-			if Less(temp.data, data) {
+			if less(temp.data, data) {
 				if temp.right == nil {
 					temp.right = node
 					node.parent = temp

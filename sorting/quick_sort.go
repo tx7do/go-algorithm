@@ -16,7 +16,7 @@ func quickSortPartition(array Interface, begin, end int) int {
 	pi := begin - 1
 
 	for i := begin; i < end; i++ {
-		if Less(array.Get(i), pivot) {
+		if less(array.Get(i), pivot) {
 			pi++
 			array.Swap(pi, i)
 		}
