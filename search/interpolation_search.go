@@ -2,7 +2,7 @@ package search
 
 // InterpolationSearch 插值查找
 func InterpolationSearch(array IntSlice, target int) int {
-	length := end - begin + 1
+	length := array.Len()
 	if length == 0 {
 		return -1
 	}
@@ -11,8 +11,7 @@ func InterpolationSearch(array IntSlice, target int) int {
 
 	var mid = 0
 	for array[low] < target && array[high] > target {
-		//mid = low + (high-low)/2
-		mid = low + (high-low)>>1
+		mid = low + divisionByTwo(high-low)
 
 		if array[mid] < target {
 			low = mid + 1

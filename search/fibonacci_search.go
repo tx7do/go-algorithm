@@ -4,7 +4,7 @@ import algorithm "go-algorithm"
 
 // FibonacciSearch 斐波那查找
 func FibonacciSearch(array IntSlice, target int) int {
-	length := end - begin + 1
+	length := array.Len()
 	if length == 0 {
 		return -1
 	}
@@ -12,9 +12,9 @@ func FibonacciSearch(array IntSlice, target int) int {
 	high := length - 1
 	max := array[high]
 
-	fibMMm2 := 0              // (m-2)'th Fibonacci No.
-	fibMMm1 := 1              // (m-1)'th Fibonacci No.
-	fibM := fibMMm2 + fibMMm1 // m'th Fibonacci
+	fibMMm2 := 0
+	fibMMm1 := 1
+	fibM := fibMMm2 + fibMMm1
 
 	for fibM < max {
 		fibMMm2 = fibMMm1

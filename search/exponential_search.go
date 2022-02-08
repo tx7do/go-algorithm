@@ -3,7 +3,7 @@ package search
 import algorithm "go-algorithm"
 
 func ExponentialSearch(array IntSlice, target int) int {
-	length := end - begin + 1
+	length := array.Len()
 	if length == 0 {
 		return -1
 	}
@@ -18,12 +18,10 @@ func ExponentialSearch(array IntSlice, target int) int {
 
 	searchRange := 1
 	for searchRange < length && array[searchRange] <= target {
-		//searchRange = searchRange * 2
-		searchRange = searchRange << 1
+		searchRange = multiplyByTwo(searchRange)
 	}
 
-	//startIndex := searchRange / 2
-	startIndex := searchRange >> 1
+	startIndex := divisionByTwo(searchRange)
 	endIndex := algorithm.Min(searchRange, length)
 	bi := BinarySearch(array[startIndex:endIndex], target)
 	if bi == -1 {

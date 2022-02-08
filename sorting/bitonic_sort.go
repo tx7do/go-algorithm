@@ -33,7 +33,7 @@ func (b bitonic) sort(array Interface, low, cnt int, dir bool, sentinel chan str
 		return
 	}
 
-	mid := b.powerOfTwo(cnt)
+	mid := b.divisionByTwo(cnt)
 
 	c1 := make(chan struct{})
 	c2 := make(chan struct{})
@@ -73,14 +73,14 @@ func (b bitonic) compareAndSwap(array Interface, i int, j int, dir bool) {
 	}
 }
 
-func (b bitonic) powerOfTwo(n int) int {
+func (b bitonic) divisionByTwo(n int) int {
 	return int(math.Floor(float64(n >> 1)))
 }
 
 func (b bitonic) greatestPowerOfTwoLessThan(n int) int {
 	k := 1
 	for k < n {
-		k = k << 1
+		k = multiplyByTwo(k)
 	}
-	return k >> 1
+	return divisionByTwo(k)
 }

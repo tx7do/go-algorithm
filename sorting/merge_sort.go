@@ -1,9 +1,5 @@
 package sorting
 
-import (
-	"math"
-)
-
 // MergeSort 归并排序
 // @see https://en.wikipedia.org/wiki/Merge_sort
 // @see https://www.enjoyalgorithms.com/blog/merge-sort-algorithm
@@ -25,7 +21,7 @@ func mergeSort(array Interface) Interface {
 		return array
 	}
 
-	mid := int(math.Floor(float64(array.Len() >> 1)))
+	mid := divisionByTwo(array.Len())
 
 	left := mergeSort(array.Part(0, mid))
 	right := mergeSort(array.Part(mid, array.Len()))

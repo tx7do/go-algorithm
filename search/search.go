@@ -1,5 +1,7 @@
 package search
 
+import "math"
+
 type IntSlice []int
 
 func (a IntSlice) Len() int {
@@ -12,4 +14,12 @@ func (a IntSlice) Less(i, j int) bool {
 
 func (a IntSlice) Swap(i, j int) {
 	a[i], a[j] = a[j], a[i]
+}
+
+func divisionByTwo(n int) int {
+	return int(math.Floor(float64(n >> 1)))
+}
+
+func multiplyByTwo(n int) int {
+	return int(math.Floor(float64(n << 1)))
 }

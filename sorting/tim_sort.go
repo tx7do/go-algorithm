@@ -27,10 +27,10 @@ func TimSort(array Interface, begin, end int) {
 		InsertionSort(array, left, right)
 	}
 
-	for size := runSize; size <= end; size = size << 1 {
-		for left = begin; left <= end; left += size << 1 {
+	for size := runSize; size <= end; size = multiplyByTwo(size) {
+		for left = begin; left <= end; left += multiplyByTwo(size) {
 			mid = left + size - 1
-			right = algorithm.Min(left+2*size-1, end)
+			right = algorithm.Min(left+multiplyByTwo(size)-1, end)
 
 			if mid < right {
 				merge(array, left, mid, right)

@@ -2,7 +2,7 @@ package search
 
 // TernarySearch 三叉树查找
 func TernarySearch(array IntSlice, target int) int {
-	length := end - begin + 1
+	length := array.Len()
 	if length == 0 {
 		return -1
 	}

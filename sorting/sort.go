@@ -211,14 +211,18 @@ func multi(i, j interface{}) int {
 	return 0
 }
 
-func powerOfTwo(n int) int {
+func divisionByTwo(n int) int {
 	return int(math.Floor(float64(n >> 1)))
+}
+
+func multiplyByTwo(n int) int {
+	return int(math.Floor(float64(n << 1)))
 }
 
 func greatestPowerOfTwoLessThan(n int) int {
 	k := 1
 	for k < n {
-		k = k << 1
+		k = multiplyByTwo(k)
 	}
-	return k >> 1
+	return divisionByTwo(k)
 }
