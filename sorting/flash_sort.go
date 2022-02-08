@@ -1,5 +1,7 @@
 package sorting
 
+import "math"
+
 // FlashSort 闪电排序
 // @see https://en.wikipedia.org/wiki/Flashsort
 func FlashSort(array IntSlice, begin, end int) {
@@ -23,43 +25,31 @@ func FlashSort(array IntSlice, begin, end int) {
 		return
 	}
 
-	m := int(0.43 * float64(length))
-	c := float64((m - 1) / (maxValue - minValue))
+	var start = 0
+	var high = length
+	var size = end - start
 
-	L := make(IntSlice, m+1)
+	var hitCount = make(IntSlice, high)
 
-	for i = begin; i <= end; i++ {
-		k := int(c*float64(array[i]-minValue)) + 1
-		L[k]++
+	var interpolation = 0
+	for i = start; i < high; i++ {
+		interpolation = int(math.Floor(float64(((array[i] - minValue) / (maxValue - minValue)) * (size - 1))))
+		hitCount[interpolation]++
 	}
-	for i = 2; i <= m; i++ {
-		L[i] += L[i-1]
+	hitCount[0] = hitCount[0] - 1
+	for i = 1; i < high; i++ {
+		hitCount[i] = hitCount[i] + hitCount[i-1]
 	}
 
-	flash, move, j, k := 0, 0, 0, m
-	for move < end {
-		for j >= L[k] {
-			j++
-			k = int(c*float64(array[j]-minValue) + 1)
-		}
-		flash = array[j]
-		for j < L[k] {
-			k = int(c*float64(flash-minValue) + 1)
-			L[k]--
-			flash, array[L[k]] = array[L[k]], flash
-			move++
+	var tag = make([]bool, high)
+	for i = start; i < high; i++ {
+		for tag[i] == false {
+			interpolation = int(math.Floor(float64(((array[i] - minValue) / (maxValue - minValue)) * (size - 1))))
+			tag[hitCount[interpolation]] = true
+			array.Swap(i, hitCount[interpolation])
+			hitCount[interpolation]--
 		}
 	}
 
-	key := 0
-	for k = 1; k < m; k++ {
-		for i = L[k] + 1; i < L[k+1]; i++ {
-			key = array[i]
-			for j = i - 1; j >= 0 && array[j] > key; {
-				array.Swap(j, j+1)
-				j--
-			}
-			array[j+1] = key
-		}
-	}
+	InsertionSort(array, begin, end)
 }
