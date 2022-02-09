@@ -52,13 +52,17 @@
 - [ ] 多相归并排序（Polyphase Merge Sort）  
 
 **5. 分布排序类型（Distribution sorts）**
-- [ ] 美国旗帜排序（American flag Sort）
+- [x] 美国旗帜排序（American flag Sort）
 - [x] 珠排序（Bead Sort）
 - [x] 桶排序（Bucket Sort）
 - [ ] 爆炸排序（Burst Sort）
 - [x] 计数排序（Counting Sort）
-- [ ] 插值排序（Interpolation Sort）
-- [ ] 相邻图排序（Proxmap Sort）
+- [x] 插值排序（Interpolation Sort）
+- [ ] 原地插值排序（In-place Interpolation Sort）
+- [ ] 插值标签排序 Interpolation tag Sort）
+- [x] 插值排序混合插入排序 Interpolation Insertion Sort）
+- [ ] 直方图排序 Histogram Sort）
+- [x] 相邻图排序（Proxmap Sort）
 - [x] 鸽巢排序（Pigeonhole Sort）
 - [x] 基数排序（Radix Sort）
 - [x] 闪电排序（Flash Sort）

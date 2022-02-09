@@ -7,6 +7,10 @@ const (
 	DescendingOrder bool = false
 )
 
+const maxUint = ^uint(0)
+const maxInt = int(maxUint >> 1)
+const minInt = -maxInt - 1
+
 // Interface of sorter
 type Interface interface {
 	Len() int

@@ -1,8 +1,11 @@
 package sorting
 
-const maxUint = ^uint(0)
-const maxInt = int(maxUint >> 1)
-const minInt = -maxInt - 1
+import (
+	"fmt"
+	"math"
+)
+
+type Buckets []IntSlice
 
 // RadixSort 基数排序
 // @see https://mp.weixin.qq.com/s/Z8gU9QLpMnA-zoMc9ZeR2w
@@ -14,18 +17,16 @@ func RadixSort(array IntSlice, begin, end int) {
 		return
 	}
 
-	maxNumber := minInt
-	for i := begin; i <= end; i++ {
-		if array[i] > maxNumber {
-			maxNumber = array[i]
-		}
-	}
+	maxNumber := getMaxNumber(array, begin, end)
+
+	const NumberOfBuckets = 10
 
 	n := 1
-	bucket := make([]IntSlice, 10)
+	bucket := make(Buckets, NumberOfBuckets)
 	for n <= maxNumber {
 		for _, v := range array {
-			bucket[(v/n)%10] = append(bucket[(v/n)%10], v)
+			digit := getDigit(v, n)
+			bucket[digit] = append(bucket[digit], v)
 		}
 		n *= 10
 
@@ -38,4 +39,31 @@ func RadixSort(array IntSlice, begin, end int) {
 			bucket[i] = bucket[i][:0]
 		}
 	}
+}
+
+func getMaxNumberOfDigits(array IntSlice, begin, end int) int {
+	maxNumber := minInt
+	temp := 0
+	for i := begin; i <= end; i++ {
+		temp = int(math.Log10(float64(array[i])) + 1)
+		if temp > maxNumber {
+			maxNumber = temp
+		}
+	}
+	fmt.Println(maxNumber)
+	return maxNumber
+}
+
+func getMaxNumber(array IntSlice, begin, end int) int {
+	maxNumber := minInt
+	for i := begin; i <= end; i++ {
+		if array[i] > maxNumber {
+			maxNumber = array[i]
+		}
+	}
+	return maxNumber
+}
+
+func getDigit(integer, divisor int) int {
+	return (integer / divisor) % 10
 }

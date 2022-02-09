@@ -41,6 +41,26 @@ func TestSmoothSort(t *testing.T) {
 			args: args{array: IntSlice{802, 630, 20, 745, 52, 300, 612, 932, 78, 187}},
 			want: IntSlice{20, 52, 78, 187, 300, 612, 630, 745, 802, 932},
 		},
+		{
+			name: "sort-7",
+			args: args{array: IntSlice{2, 3, 6, 9, 0, 3, 9, 6, 5, 7}},
+			want: IntSlice{0, 2, 3, 3, 5, 6, 6, 7, 9, 9},
+		},
+		{
+			name: "sort-8",
+			args: args{array: IntSlice{3, 2}},
+			want: IntSlice{2, 3},
+		},
+		{
+			name: "sort-9",
+			args: args{array: IntSlice{3, 10, 2}},
+			want: IntSlice{2, 3, 10},
+		},
+		{
+			name: "sort-10",
+			args: args{array: IntSlice{3, 2, 5, 1}},
+			want: IntSlice{1, 2, 3, 5},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
