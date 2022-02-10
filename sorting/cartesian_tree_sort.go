@@ -17,6 +17,8 @@ import (
 // @see https://en.wikipedia.org/wiki/Cartesian_tree#Application_in_sorting
 // @see https://ethz.ch/content/dam/ethz/special-interest/infk/chair-program-method/pm/documents/Verify%20This/Challenges%202019/cartesian_trees.pdf
 // @see https://people.csail.mit.edu/jshun/alenex2011.pdf
+// @see https://medium.com/swlh/cartesian-sequence-and-binary-tree-538cbd0b0ca8
+// @see https://github.com/iiitu-force/Hacktoberfest-2021/blob/main/CartesianTreeSort.cpp
 func CartesianTreeSort(array IntSlice, begin, end int) {
 	length := end - begin + 1
 	if length < 2 {
@@ -43,53 +45,63 @@ type cartesianTree struct {
 	last *cartesianNode
 }
 
-func (t *cartesianTree) getRoot() *cartesianNode {
-	return t.root
+// storeSorted Stores inorder traversal of the Cartesian Tree
+func (n *cartesianNode) storeSorted(array IntSlice, i *int) {
+	if n == nil {
+		return
+	}
+
+	array[*i] = n.data
+	*i++
+
+	n.left.storeSorted(array, i)
+
+	n.right.storeSorted(array, i)
 }
 
-func (t *cartesianTree) print(w io.Writer) {
-	printCartesianTree(w, t.getRoot(), 0, 'M')
+func (n *cartesianNode) findRightMost() *cartesianNode {
+	curr := n
+	for curr != nil {
+		if curr.right == nil {
+			return curr
+		}
+		curr = curr.right
+	}
+	return nil
 }
 
-func (t *cartesianTree) storeSorted(array IntSlice, begin, end int) {
-	i := begin
-	storeSortedCartesianTree(t.root, array, &i)
-}
-
-func (t *cartesianTree) findLowestNode(node *cartesianNode, data int) *cartesianNode {
-	if node.data < data {
-		return node
-	} else if node.parent != nil {
-		return t.findLowestNode(node.parent, data)
+func (n *cartesianNode) findLowestNode(data int) *cartesianNode {
+	if n == nil {
+		return nil
+	}
+	if n.data < data {
+		return n
+	} else if n.parent != nil {
+		return n.parent.findLowestNode(data)
 	} else {
 		return nil
 	}
 }
 
-// buildTree a cartesian tree
-func (t *cartesianTree) buildTree(array IntSlice, begin, end int) *cartesianTree {
-	for i := begin; i <= end; i++ {
-		t.insert(array[i])
+// print the Cartesian Tree node
+func (n *cartesianNode) print(w io.Writer, ns int, ch rune) {
+	if n == nil {
+		return
 	}
-	return t
+
+	for i := 0; i < ns; i++ {
+		_, _ = fmt.Fprint(w, " ")
+	}
+	_, _ = fmt.Fprintf(w, "%c:%v\n", ch, n.data)
+	n.left.print(w, ns+2, 'L')
+	n.right.print(w, ns+2, 'R')
 }
 
-// insert a cartesian tree Node into tree
-func (t *cartesianTree) insert(data int) *cartesianTree {
-	if t.root == nil {
-		t.root = &cartesianNode{data: data, left: nil, right: nil, parent: nil}
-		t.last = t.root
-	} else {
-		t.last = t.root.insert(t, data)
-	}
-	return t
-}
-
-// insert a cartesian tree Node into Node
+// insert a cartesian tree Node
 func (n *cartesianNode) insert(tree *cartesianTree, data int) *cartesianNode {
 	newNode := &cartesianNode{data: data, left: nil, right: nil, parent: nil}
 
-	lowestNode := tree.findLowestNode(tree.last, data)
+	lowestNode := tree.last.findLowestNode(data)
 	if lowestNode == nil {
 		newNode.left = tree.root
 		tree.root.parent = newNode
@@ -102,30 +114,30 @@ func (n *cartesianNode) insert(tree *cartesianTree, data int) *cartesianNode {
 	return newNode
 }
 
-// storeSortedCartesianTree Stores inorder traversal of the Cartesian Tree
-func storeSortedCartesianTree(node *cartesianNode, array IntSlice, i *int) {
-	if node == nil {
-		return
-	}
-
-	array[*i] = node.data
-	*i++
-
-	storeSortedCartesianTree(node.left, array, i)
-
-	storeSortedCartesianTree(node.right, array, i)
+func (t *cartesianTree) print(w io.Writer) {
+	t.root.print(w, 0, 'M')
 }
 
-// printCartesianTree print the Cartesian Tree
-func printCartesianTree(w io.Writer, node *cartesianNode, ns int, ch rune) {
-	if node == nil {
-		return
-	}
+func (t *cartesianTree) storeSorted(array IntSlice, begin, end int) {
+	i := begin
+	t.root.storeSorted(array, &i)
+}
 
-	for i := 0; i < ns; i++ {
-		_, _ = fmt.Fprint(w, " ")
+// buildTree a cartesian tree
+func (t *cartesianTree) buildTree(array IntSlice, begin, end int) *cartesianTree {
+	for i := begin; i <= end; i++ {
+		t.insert(array[i])
 	}
-	_, _ = fmt.Fprintf(w, "%c:%v\n", ch, node.data)
-	printCartesianTree(w, node.left, ns+2, 'L')
-	printCartesianTree(w, node.right, ns+2, 'R')
+	return t
+}
+
+// insert a cartesian tree Node
+func (t *cartesianTree) insert(data int) *cartesianTree {
+	if t.root == nil {
+		t.root = &cartesianNode{data: data, left: nil, right: nil, parent: nil}
+		t.last = t.root
+	} else {
+		t.last = t.root.insert(t, data)
+	}
+	return t
 }
