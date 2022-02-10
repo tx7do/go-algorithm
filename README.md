@@ -30,7 +30,7 @@
 **2. 选择排序类型（Selection sorts）**
 - [x] 选择排序（Selection Sort） 
 - [x] 堆排序（Heap Sort）  
-- [ ] 平滑排序（Smooth Sort）  
+- [x] 平滑排序（Smooth Sort）  
 - [ ] 笛卡尔树排序（Cartesian tree Sort）  
 - [ ] 锦标赛排序（Tournament Sort）  
 - [x] 圈排序（Cycle Sort）  
