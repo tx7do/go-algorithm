@@ -1,20 +1,6 @@
-# go-algorithm
+# 排序算法（Sort Algorithm）
 
-## 查找算法（Search Algorithm）
-
-- [x] [顺序查找（Sequential Search）](./search/linear_search.go)
-- [x] [二叉树查找（Binary Search）](./search/binary_search.go)
-- [x] [三叉树查找（Ternary Search）](./search/ternary_search.go)
-- [x] [插值查找（Interpolation Search）](./search/interpolation_search.go)
-- [x] [斐波那契查找（Fibonacci Search）](./search/fibonacci_search.go)
-- [x] [指数查找（Exponential Search）](./search/exponential_search.go)
-- [ ] [树表查找（Tree table lookup）](./search/tree_table_lookup.go)
-- [ ] [分块查找（Blocking Search）](./search/block_search.go)
-- [ ] [哈希查找（Hash Search）](./search/hash_search.go)  
-
-## 排序算法（Sort Algorithm）
-
-### **1. 交换排序类型（Exchange sorts）**
+## **1. 交换排序类型（Exchange sorts）**
 
 - [x] [冒泡排序（Bubble Sort）](./sorting/bubble_sort.go)
 - [x] [鸡尾酒排序（Cocktail Shaker Sort）](./sorting/cocktail_sort.go)
@@ -28,7 +14,7 @@
 - [x] [猴子排序（Bogo Sort）](./sorting/bogo_sort.go)
 - [x] [休眠排序（Sleep Sort）](./sorting/sleep_sort.go)
 
-### **2. 选择排序类型（Selection sorts）**
+## **2. 选择排序类型（Selection sorts）**
 
 - [x] [选择排序（Selection Sort）](./sorting/selection_sort.go) 
 - [x] [堆排序（Heap Sort）](./sorting/heap_sort.go)  
@@ -38,7 +24,7 @@
 - [x] [圈排序（Cycle Sort）](./sorting/cycle_sort.go)  
 - [x] [弱堆排序（Weak-heap Sort）](./sorting/weak_heap_sort.go)  
 
-### **3. 插入排序类型（Insertion sorts）**
+## **3. 插入排序类型（Insertion sorts）**
 
 - [x] [插入排序（Insertion Sort）](./sorting/insertion_sort.go)
 - [x] [希尔排序（Shell Sort）](./sorting/shell_sort.go)  
@@ -47,7 +33,7 @@
 - [ ] [图书馆排序（Library Sort）](./sorting/library_sort.go)  
 - [x] [耐心排序（Patience Sort）](./sorting/patience_sort.go)  
 
-### **4. 归并排序类型（Merge sorts）**
+## **4. 归并排序类型（Merge sorts）**
 
 - [x] [归并排序（Merge Sort）](./sorting/merge_sort.go)
 - [x] [原地归并排序（In-place Merge Sort）](./sorting/merge_sort.go)  
@@ -55,7 +41,7 @@
 - [ ] [振荡归并排序（Oscillating Merge Sort）](./sorting/oscillating_merge_sort.go)  
 - [ ] [多相归并排序（Polyphase Merge Sort）](./sorting/polyphase_merge_sort.go)  
 
-### **5. 分布排序类型（Distribution sorts）**
+## **5. 分布排序类型（Distribution sorts）**
 
 - [x] [美国旗帜排序（American flag Sort）](./sorting/american_flag_sort.go)
 - [x] [珠排序（Bead Sort）](./sorting/bead_sort.go)
@@ -72,14 +58,14 @@
 - [x] [基数排序（Radix Sort）](./sorting/radix_sort.go)
 - [x] [闪电排序（Flash Sort）](./sorting/flash_sort.go)
 
-### **6. 并发排序类型（Concurrent sorts）**
+## **6. 并发排序类型（Concurrent sorts）**
 
 - [x] [双调排序器（Bitonic sorter）](./sorting/bitonic_sort.go)
 - [ ] [归并网络（Batcher odd–even mergesort）](./sorting)
 - [ ] [两两排序网络（Pairwise sorting network）](./sorting)
 - [ ] [样本排序（Samplesort）](./sorting)
 
-### **7. 混合排序类型（Hybrid sorts）**
+## **7. 混合排序类型（Hybrid sorts）**
 
 - [ ] [块排序（Block merge Sort）](./sorting/block_sort.go)
 - [ ] [柯克帕特里克-赖斯排序（Kirkpatrick-Reisch Sort）](./sorting/kirkpatrick_reisch_sort.go)
@@ -88,7 +74,7 @@
 - [ ] [展开排序（Spread Sort）](./sorting/spread_sort.go)
 - [ ] [归并插入排序（Merge-insertion Sort）](./sorting)
 
-### **8. 其他类型**
+## **8. 其他类型**
 
 - [ ] [拓扑排序（Topological Sort）](./sorting/topological_sort.go)
 - [x] [煎饼排序（Pancake Sort）](./sorting/pancake_sort.go)
